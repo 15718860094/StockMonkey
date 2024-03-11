@@ -1,0 +1,99 @@
+{
+    "Serilog": {
+      "MinimumLevel": {
+        "Default": "Debug",
+        "Override": {
+          "Default": "Debug",
+          "System": "Warning",
+          "Microsoft": "Warning",
+          "Orleans": "Warning"
+        }
+      },
+      "WriteTo": [
+        {
+          "Name": "Console",
+          "Args": {
+            "outputTemplate": "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}{Offset:zzz}][{Level:u3}] [{SourceContext}] {Message}{NewLine}{Exception}"
+          }
+        },
+        {
+          "Name": "RollingFile",
+          "Args": {
+            "pathFormat": "Logs/log-{Date}.log",
+            "outputTemplate": "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}{Offset:zzz}][{Level:u3}] [{SourceContext}] {Message}{NewLine}{Exception}",
+            "rollOnFileSizeLimit": true,
+            "rollingInterval": "Day",
+            "retainedFileCountLimit": 15
+          }
+        }
+      ]
+    },
+  "ConnectionStrings": {
+          "Default": "mongodb://admin1111:qHh5jRYPV6tX1111@10.10.32.166:27017,10.10.32.164:27017,10.10.32.163:27017/SchrodingerServer?authSource=admin"
+      },
+      "Orleans": {
+          "ClusterId": "SchrodingerServerSiloCluster",
+          "ServiceId": "SchrodingerServerOrleansBasicService",
+          "AdvertisedIP": "10.10.32.179",
+          "GatewayPort" : 20001,
+          "SiloPort": 10001,
+          "MongoDBClient": "mongodb://admin1111:qHh5jRYPV6tX1111@10.10.32.166:27017,10.10.32.164:27017,10.10.32.163:27017/?maxPoolSize=555",
+          "DataBase": "SchrodingerServerOrleansDB",
+          "DashboardUserName": "sjn",
+          "DashboardPassword": "123456",
+          "DashboardCounterUpdateIntervalMs": 1000,
+          "DashboardPort": 8088,
+          "EventStoreConnection": "ConnectTo=tcp://admin:changeit@localhost:1113; HeartBeatTimeout=500",
+          "ClusterDbConnection": "10.10.81.117:6379",
+          "ClusterDbNumber": 0,
+          "GrainStorageDbConnection": "10.10.81.117:6379",
+          "GrainStorageDbNumber": 0,
+          "CollectionAge":120
+      },
+      "Chains": {
+      "ChainInfos": {
+        "AELF": {
+          "BaseUrl": "https://aelf-test-node.aelf.io",
+          "IsMainChain": true,
+          "ContractAddress": {
+          }
+        },
+        "tDVW": {
+          "BaseUrl": "https://tdvw-test-node.aelf.io",
+          "IsMainChain": false,
+          "ContractAddress": {
+          }
+        }
+      }
+    },"ElasticUris": {
+      "Uris": [
+        "http://10.10.32.173:9200",
+        "http://10.10.32.170:9200",
+        "http://10.10.32.168:9200" 
+      ]
+    },
+    "IndexSetting": {
+      "NumberOfShards": 5,
+      "NumberOfReplicas": 1,
+      "IndexPrefix": "SchrodingerServer"
+    },
+    "Contract": {
+      "Delay": 3000,
+      "RetryDelay": 2000,
+      "RetryTimes": 12,
+      "SafeBlockHeight": 50
+    },
+    "Redis": {
+      "Configuration": "10.10.81.117" 
+    },
+    "RabbitMQ": {
+      "Connections": {
+        "Default": {
+          "HostNames": ["10.10.32.162","10.10.32.160","10.10.32.158"],
+          "Port": "5672",
+          "UserName": "schrodinger",
+          "Password": "YIJZvvH29yEf7Qae"
+        }
+      }
+    }
+  }
